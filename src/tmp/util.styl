@@ -1,0 +1,18 @@
+px(px, vw = false)
+  if vw
+    unit(round((px / 3.75), 2), 'vw')
+  else
+    px == 0 ? 0 : unit(px, 'px')
+
+vw(px)
+  px(px, true)
+
+size($size, $type = px, hasVw = false)
+  if $type == px
+    px($size, hasVw)
+  else if $type == vw
+    vw($size)
+  else if $type == percent
+    unit($size, '%')
+  else
+    $size

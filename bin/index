@@ -1,0 +1,22 @@
+#!/usr/bin/env node
+
+const chalk = require('chalk')
+const { i, o } = require('optimist').argv
+const build = require('../src/index.js')
+const notice = msg => {
+  console.log(chalk.red(msg))
+}
+const checkExt = str => /\.(js|json)/.test(str)
+
+if (!i) {
+  notice(`--i 不能为空`)
+} else if (!o) {
+  notice(`--o 不能为空`)
+} else if (!checkExt(i)) {
+  notice(`--i 须为 .js 或 .json 文件路径`)
+} else {
+  build(i, o)
+// else if (!checkExt(o)) {
+//   notice(`--o 须为 .js 或 .json 文件路径`)
+// } else {
+}

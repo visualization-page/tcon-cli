@@ -1,0 +1,25 @@
+{
+  "name": "tcon-cli",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/visualization-page/tcon-cli.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/visualization-page/tcon-cli/issues"
+  },
+  "homepage": "https://github.com/visualization-page/tcon-cli#readme",
+  "dependencies": {
+    "chalk": "^2.4.2",
+    "optimist": "^0.6.1",
+    "tcon": "^1.0.0"
+  }
+}

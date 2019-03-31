@@ -97,7 +97,7 @@ const buildDist = async (tarPath) => {
 
 module.exports = async (varPath, tarPath) => {
   await bakSrc()
-  const result = await transfer(varPath)
+  const result = await transfer(path.resolve(process.cwd(), varPath))
   await write(result)
-  await buildDist(tarPath)
+  await buildDist(path.resolve(process.cwd(), tarPath))
 }

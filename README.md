@@ -10,7 +10,7 @@ xnpm i tcon-cli --save-dev
 npm i tcon-cli --save-dev
 ```
 
-自定义变量文件 `style/tcon/tcon-var.js`，可定义的变量内容请参照 [var.styl]()
+自定义变量文件 `style/tcon/tcon-var.js`，可定义的变量内容请参照 [var.styl](https://github.com/visualization-page/tcon/blob/master/src/var.styl)
 
 ```js
 module.exports = {

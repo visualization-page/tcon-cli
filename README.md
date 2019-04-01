@@ -44,3 +44,16 @@ tcon --i=style/tcon/tcon-var.js --o=style/tcon
   ]
 }
 ```
+
+在项目中引用
+
+```js
+import { button, size } from 'tcon'
+```
+
+就会转化为
+
+```js
+import 'style/tcon/button.css'
+import 'style/tcon/size.css'
+```

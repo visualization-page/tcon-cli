@@ -10,6 +10,17 @@ xnpm i tcon-cli --save-dev
 npm i tcon-cli --save-dev
 ```
 
+自定义变量文件 `style/tcon/tcon-var.js`，可定义的变量内容请参照 [var.styl]()
+
+```js
+module.exports = {
+  color: {
+    '000': '#111'
+  },
+  placeholder: '#333'
+}
+```
+
 例如
 
 ```
@@ -57,3 +68,5 @@ import { button, size } from 'tcon'
 import 'style/tcon/button.css'
 import 'style/tcon/size.css'
 ```
+
+结合 babel 使用，请参考 [babel-plugin-tcon](https://github.com/visualization-page/babel-plugin-tcon)

@@ -1,5 +1,7 @@
 const { exec } = require('child_process')
 const path = require('path')
+const Ora = require('ora')
+const spinner = new Ora()
 const fs = require('fs').promises
 const tconSrc = path.resolve(__dirname, '../node_modules', 'tcon/src')
 const tmpDir = path.resolve(__dirname, './tmp')
@@ -53,7 +55,7 @@ const transfer = (varPath) => {
 const write = async (res) => {
   const oPath = `${tconSrc}/custom.styl`
   await fs.writeFile(oPath, res, 'utf8')
-  console.log('写入成功')
+  // console.log('写入成功')
   const dirs = await fs.readdir(tconSrc)
   const all = []
 
@@ -66,7 +68,7 @@ const write = async (res) => {
         let con = await fs.readFile(originFile, 'utf8')
         con = con.replace(/var\.styl/, () => 'custom.styl')
         await fs.writeFile(targetFile, con, 'utf8')
-        console.log(`${dir} var.styl => custom.styl 成功`)
+        // console.log(`${dir} var.styl => custom.styl 成功`)
       }
       resolve()
     }))
@@ -77,9 +79,14 @@ const write = async (res) => {
 
 const buildDist = async (tarPath) => {
   const tconPath = path.resolve(__dirname, '../node_modules', 'tcon')
-  const buildPath = path.resolve(__dirname, '../', tarPath)
+  const hasDir = await fs.readdir(tarPath).catch(() => false)
+  if (hasDir === false) {
+    spinner.fail(`目录不存在 ${tarPath}`)
+    process.exit(0)
+  }
+
   const json = require(`${tconPath}/package.json`)
-  const modifyPath = name => `stylus src/${name === 'tcon' ? '' : `${name}/`}index.styl -o ${path.resolve(buildPath, `${name}.css`)} --compress`
+  const modifyPath = name => `stylus src/${name === 'tcon' ? '' : `${name}/`}index.styl -o ${path.resolve(tarPath, `${name}.css`)} --compress`
   const tconDirs = ['', 'size', 'layout', 'color', 'text', 'border', 'shadow', 'reset', 'button']
   const modify = () => {
     tconDirs.forEach(i => {
@@ -96,8 +103,14 @@ const buildDist = async (tarPath) => {
 }
 
 module.exports = async (varPath, tarPath) => {
+  spinner.start('写入中...')
   await bakSrc()
-  const result = await transfer(path.resolve(process.cwd(), varPath))
+  const originPath = path.resolve(process.cwd(), varPath)
+  const result = await transfer(originPath)
+
   await write(result)
-  await buildDist(path.resolve(process.cwd(), tarPath))
+
+  const buildPath = path.resolve(process.cwd(), tarPath)
+  await buildDist(buildPath)
+  spinner.succeed(`写入完成 ${buildPath}`)
 }

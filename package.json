@@ -1,6 +1,6 @@
 {
   "name": "tcon-cli",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -23,6 +23,7 @@
   "dependencies": {
     "chalk": "^2.4.2",
     "optimist": "^0.6.1",
+    "ora": "^3.2.0",
     "tcon": "^1.0.0"
   }
 }

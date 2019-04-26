@@ -59,14 +59,14 @@ tcon --i=style/tcon/tcon-var.js --o=style/tcon
 在项目中引用
 
 ```js
-import { button, size } from 'tcon'
+import 'tcon/size/button'
 ```
 
 就会转化为
 
 ```js
-import 'style/tcon/button.css'
-import 'style/tcon/size.css'
+import '@/style/tcon/button.css'
+import '@/style/tcon/size.css'
 ```
 
 结合 babel 使用，请参考 [babel-plugin-tcon](https://github.com/visualization-page/babel-plugin-tcon)
